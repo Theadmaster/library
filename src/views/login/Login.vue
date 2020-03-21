@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="body">
     <div class="box">
       <!-- logo -->
       <div class="logo">
@@ -21,7 +21,6 @@
         </el-form-item>
       </el-form>
     </div>
-
   </div>
 </template>
 
@@ -62,18 +61,20 @@ export default {
       console.log(this);
     },
     login() {
+
         this.$message({
           message: '登录成功',
           type: 'success'
         });
+        this.$router.push('/home')
     }
   }
-};
+}
 </script>
 
 <style>
 body {
-  background-color: #487eb0;
+  background-color: #2d3a4b;
 }
 
 .box {
