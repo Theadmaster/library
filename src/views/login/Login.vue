@@ -16,7 +16,7 @@
         </el-form-item>
         <!-- 按钮 -->
         <el-form-item class="btns">
-          <el-button type="primary" @click="login" >登录</el-button>
+          <el-button :loading="loading" type="primary" @click="handleLogin" >登录</el-button>
           <el-button type="info" @click="btnClick">重置</el-button>
         </el-form-item>
       </el-form>
@@ -33,6 +33,7 @@ export default {
         username: "",
         password: ""
       },
+      loading: false,
       rules: {
         username: [
           { required: true, message: "请输入用户名", trigger: "blur" },
@@ -60,20 +61,36 @@ export default {
       this.$refs.formRef.resetFields();
       console.log(this);
     },
-    login() {
+    // login() {
 
-        this.$message({
-          message: '登录成功',
-          type: 'success'
-        });
-        this.$router.push('/home')
+    //     this.$message({
+    //       message: '登录成功',
+    //       type: 'success'
+    //     });
+    //     this.$router.push('/home')
+    // }
+    handleLogin() {
+      this.$refs.formRef.validate(valid => {
+        if (valid) {
+          this.loading = true
+          this.$store.dispatch('user/login', this.user).then(() => {
+            this.$router.push('/home')
+            this.loading = false
+          }).catch(() => {
+            this.loading = false
+          })
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
     }
   }
 }
 </script>
 
-<style>
-body {
+<style scoped>
+.body {
   background-color: #2d3a4b;
 }
 
@@ -87,6 +104,7 @@ body {
   transform: translate(-50%, -50%);
   border-radius: 20px;
   display: flex;
+  /* background-color: #2d3a4b; */
 }
 
 .logo {
