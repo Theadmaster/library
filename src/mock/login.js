@@ -13,5 +13,19 @@ export default {
             "name": 'tyt',
             "age": 18
         }
+    },
+    getMenuInfo: () => {
+        return {
+            "data": {
+                "id": 101,
+                "authName": "用户管理",
+                "path": null,
+                "children": []
+            },
+            "meta": {
+                "msg": "获取菜单成功",
+                "status": 200
+            }
+        }
     }
 }

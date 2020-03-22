@@ -7,6 +7,8 @@ Mock.setup({
   timeout: '200-2000'
 })
 
+const baseUrl = 'http://127.0.0.1'
 // 登录数据的拦截
-Mock.mock('http://127.0.0.1/public/login', 'post', Login.getToken)
+Mock.mock(baseUrl + '/public/login', 'post', Login.getToken)
 Mock.mock('http://localhost/user/info', 'post', Login.getUserInfo)
+Mock.mock(baseUrl + '/menu/tree', 'get', Login.getMenuInfo)

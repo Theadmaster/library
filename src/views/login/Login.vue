@@ -1,9 +1,9 @@
 <template>
-  <div class="body">
+  <div class="home-container">
     <div class="box">
       <!-- logo -->
       <div class="logo">
-        <img src="~assets/logo.png" alt />
+        <img src="~assets/slogo.png" alt />
       </div>
       <!-- 表单 -->
       <el-form label-width="0px" :rules="rules" :model="user" ref="formRef">
@@ -13,6 +13,9 @@
         </el-form-item>
         <el-form-item label prop="password">
           <el-input type="password" prefix-icon="el-icon-lock" v-model="user.password"></el-input>
+          <!-- <span class="show-pwd" @click="showPwd">
+            <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+          </span> -->
         </el-form-item>
         <!-- 按钮 -->
         <el-form-item class="btns">
@@ -33,6 +36,7 @@ export default {
         username: "",
         password: ""
       },
+      passwordType: 'password',
       loading: false,
       rules: {
         username: [
@@ -57,6 +61,16 @@ export default {
     };
   },
   methods: {
+    showPwd() {
+      if (this.passwordType === 'password') {
+        this.passwordType = ''
+      } else {
+        this.passwordType = 'password'
+      }
+      this.$nextTick(() => {
+        this.$refs.password.focus()
+      })
+    },
     btnClick() {
       this.$refs.formRef.resetFields();
       console.log(this);
@@ -90,7 +104,7 @@ export default {
 </script>
 
 <style scoped>
-.body {
+.home-container {
   background-color: #2d3a4b;
 }
 
@@ -137,6 +151,16 @@ export default {
 .btns {
   display: flex;
   justify-content: flex-end;
+}
+
+.show-pwd {
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    font-size: 16px;
+    color:#889aa4;
+    cursor: pointer;
+    
 }
 
 
